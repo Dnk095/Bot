@@ -4,7 +4,7 @@ using UnityEngine;
 public class Gold : MonoBehaviour
 {
     private PickingObject _pickingObject;
-    private GoldVisible _view;
+    private ObjectTransparency _view;
 
     private bool _isFound = false;
 
@@ -13,7 +13,7 @@ public class Gold : MonoBehaviour
     private void Awake()
     {
         _pickingObject = GetComponent<PickingObject>();
-        _view = GetComponent<GoldVisible>();
+        _view = GetComponent<ObjectTransparency>();
     }
 
     public void ChangeState()

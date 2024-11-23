@@ -27,12 +27,6 @@ public class Distributor : MonoBehaviour
             worker.ReturnedToBase -= OnReturnedToBase;
     }
 
-    public void AddGoldToList(List<Gold> golds)
-    {
-        foreach (Gold gold in golds)
-            _golds.AddGold(gold);
-    }
-
     public void InitNewWorker(Worker worker)
     {
         _workers.Add(worker);

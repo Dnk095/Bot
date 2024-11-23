@@ -41,13 +41,13 @@ public class GoldList : MonoBehaviour
         Gold currentGold = _golds[0];
 
         foreach (Gold gold2 in _golds)
-            if (CountDistance(position, gold2.transform.position) < CountDistance(position, currentGold.transform.position))
+            if (CalculateDistance(position, gold2.transform.position) < CalculateDistance(position, currentGold.transform.position))
                 currentGold = gold2;
 
         return currentGold;
     }
 
-    private float CountDistance(Vector3 target, Vector3 position)
+    private float CalculateDistance(Vector3 target, Vector3 position)
     {
         return (target - position).sqrMagnitude;
     }

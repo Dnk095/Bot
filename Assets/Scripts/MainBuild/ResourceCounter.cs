@@ -11,11 +11,5 @@ public class ResourceCounter : MonoBehaviour
     {
         _quantityGold += quantityGold;
         ChangedGold?.Invoke(_quantityGold);
-    }
-
-    public void ReduceGold(int quantityGold)
-    {
-        _quantityGold -= quantityGold;
-        ChangedGold?.Invoke(_quantityGold);
-    }
+    }   
 }

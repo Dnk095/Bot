@@ -17,9 +17,4 @@ public class PickingObject : MonoBehaviour
 
         _rigidbody.isKinematic = true;
     }
-
-    public void Trow()
-    {
-        transform.SetParent(null);
-    }
 }

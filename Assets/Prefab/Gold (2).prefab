@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 4230525290557854885}
   - component: {fileID: 4230525290557854884}
   - component: {fileID: 4230525290557854883}
-  - component: {fileID: 7941517422040098282}
+  - component: {fileID: 9125703467001062244}
   m_Layer: 0
-  m_Name: Gold
+  m_Name: Gold (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4230525290557854882}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 60.71782, y: 0.4999981, z: 65.62588}
+  m_LocalPosition: {x: -49.63379, y: -5.5831885, z: -9.4226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8ea55a6592c4844a6af0bbbc0547fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7941517422040098282
+--- !u!114 &9125703467001062244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +150,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4230525290557854882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44ae624b23cf5f4d99fb14a0030bb09, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fed21559b19f3d499eb68aa0eed4683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _material: {fileID: 2100000, guid: 402ddae1eb373a94aa1d1c4aa5a23a5e, type: 2}
