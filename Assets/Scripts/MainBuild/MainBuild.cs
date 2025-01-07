@@ -77,7 +77,7 @@ public class MainBuild : MonoBehaviour
     {
         int minQuantittyWorkerForBuild = 2;
 
-        if (quantity >= _workerPrice && _flagTeked == false || _quantityWorkers < minQuantittyWorkerForBuild && quantity >= _workerPrice)
+        if (quantity >= _workerPrice && (_flagTeked == false || _flagTeked == true && _quantityWorkers < minQuantittyWorkerForBuild))
             Spawn();
         else if (quantity >= _basePrice && _flagTeked == true)
             Build();
