@@ -9,7 +9,11 @@ public class Distributor : MonoBehaviour
 
     private List<Worker> _workers;
 
+    private bool _haveFlag = false;
+    private Flag _flag;
+
     public event Action AddGold;
+    public event Action<Worker> WorkerBuild;
 
     private void Awake()
     {
@@ -18,7 +22,7 @@ public class Distributor : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Maining());
+        StartCoroutine(Work());
     }
 
     private void OnDisable()
@@ -27,31 +31,54 @@ public class Distributor : MonoBehaviour
             worker.ReturnedToBase -= OnReturnedToBase;
     }
 
+    public void Init(GoldList golds)
+    {
+        _golds = golds;
+    }
+
     public void InitNewWorker(Worker worker)
     {
-        _workers.Add(worker);
         worker.InitCreated(this);
+        _workers.Add(worker);
         worker.ReturnedToBase += OnReturnedToBase;
+    }
+
+    public void GetFlag(Flag flag)
+    {
+        _flag = flag;
+        _haveFlag = true;
+    }
+
+    private IEnumerator Work()
+    {
+        while (enabled)
+        {
+            if (_haveFlag == true && _workers.Count > 0)
+                WorkerGoBuild();
+            else if (_workers.Count > 0 && _golds.HaveResorce() && _haveFlag == false)
+                WorkerGoMaining();
+
+            yield return null;
+        }
     }
 
     private void WorkerGoMaining()
     {
         Worker worker = _workers[0];
         Gold gold = _golds.GetGoldMinimumDistance(worker.transform.position);
+        worker.Maining(gold);
         _golds.RemoveGold(gold);
-        worker.Init(gold);
         _workers.Remove(worker);
     }
 
-    private IEnumerator Maining()
+    private void WorkerGoBuild()
     {
-        while (enabled)
-        {
-            if (_workers.Count > 0 && _golds.HaveResorce())
-                WorkerGoMaining();
-
-            yield return null;
-        }
+        Worker worker = _workers[0];
+        _workers.Remove(worker);
+        worker.InitBuild(_flag);
+        _haveFlag = false;
+        WorkerBuild?.Invoke(worker);
+        worker.ReturnedToBase -= OnReturnedToBase;
     }
 
     private void OnReturnedToBase(Worker worker)

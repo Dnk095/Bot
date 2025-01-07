@@ -11,10 +11,13 @@ public class Worker : MonoBehaviour
     private Distributor _distributor;
     private Mover _mover;
     private Gold _gold;
+    private Flag _flag;
 
     private bool _haveGold = false;
+    private bool _goBuild = false;
 
     public event Action<Worker> ReturnedToBase;
+    public event Action<Vector3> Building;
 
     private void Awake()
     {
@@ -31,11 +34,19 @@ public class Worker : MonoBehaviour
             _haveGold = true;
             ReturnToBase();
         }
+        else if (other.TryGetComponent(out Flag flag) && flag == _flag && _goBuild == true)
+        {
+            _controller.StopWalk();
+            _mover.StopMove();
+            Building?.Invoke(_flag.transform.position);
+            _goBuild = false;
+            flag.ChangeState();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out MainBuild _) && _haveGold == true)
+        if (collision.gameObject.TryGetComponent(out Distributor distributor) && distributor == _distributor && _haveGold == true)
         {
             _controller.StopWalk();
             ReturnedToBase?.Invoke(this);
@@ -43,6 +54,7 @@ public class Worker : MonoBehaviour
             _gold.transform.SetParent(null);
             _haveGold = false;
             Destroy(_gold.gameObject);
+            _mover.StopMove();
         }
     }
 
@@ -51,7 +63,15 @@ public class Worker : MonoBehaviour
         _distributor = distributor;
     }
 
-    public void Init(Gold gold)
+    public void InitBuild(Flag flag)
+    {
+        _flag = flag;
+        _goBuild = true;
+        _controller.Walk();
+        _mover.Move(flag.transform.position);
+    }
+
+    public void Maining(Gold gold)
     {
         _controller.Walk();
         _gold = gold;

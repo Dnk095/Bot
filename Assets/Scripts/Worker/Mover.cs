@@ -18,6 +18,11 @@ public class Mover : MonoBehaviour
         _coroutine = StartCoroutine(Transfer());
     }
 
+    public void StopMove()
+    {
+        _target = transform.position;
+    }
+
     private IEnumerator Transfer()
     {
         transform.LookAt(_target);

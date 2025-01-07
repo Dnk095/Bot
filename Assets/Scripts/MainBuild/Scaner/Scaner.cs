@@ -10,28 +10,36 @@ public class Scaner : MonoBehaviour
     [SerializeField] private ScanButton _scanButton;
 
     private Coroutine _coroutine;
-
+    private Vector3 _scanPosition;
     private bool _isScaning = false;
 
     public event Action<float> ChangeTime;
+    public event Action Scaning;
 
     private void OnEnable()
     {
-        _scanButton.Used += Scan;
+        _scanButton.Used += OnUsed;
     }
 
     private void OnDisable()
     {
-        _scanButton.Used -= Scan;
+        _scanButton.Used -= OnUsed;
     }
 
-    private void Scan()
+    public void Scan(Vector3 position )
     {
-        if (_coroutine != null && _isScaning == false)
+        _scanPosition = position;
+
+        if (_coroutine != null && _isScaning == false )
             StopCoroutine(_coroutine);
 
-        if (_isScaning == false)
+        if (_isScaning == false )
             _coroutine = StartCoroutine(StartScan());
+    }
+
+    private void OnUsed()
+    {
+        Scaning?.Invoke();
     }
 
     private IEnumerator StartScan()
@@ -53,7 +61,7 @@ public class Scaner : MonoBehaviour
 
         _isScaning = false;
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, _radius);
+        Collider[] hits = Physics.OverlapSphere(_scanPosition, _radius);
 
         foreach (Collider hit in hits)
         {
