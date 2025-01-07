@@ -57,7 +57,7 @@ public class MainBuild : MonoBehaviour
     public void AddBuilder(Worker worker)
     {
         _distributor.InitNewWorker(worker);
-        _quantityWorkers ++;
+        _quantityWorkers++;
     }
 
     public void GetFlagPosition(Vector3 position)
@@ -75,9 +75,9 @@ public class MainBuild : MonoBehaviour
 
     private void OnChangeGold(int quantity)
     {
-        if (quantity >= _workerPrice && _flagTeked == false)
-            Spawn();
-        else if (quantity >= _workerPrice && _flagTeked == true && _quantityWorkers < 2)
+        int minQuantittyWorkerForBuild = 2;
+
+        if (quantity >= _workerPrice && _flagTeked == false || _quantityWorkers < minQuantittyWorkerForBuild && quantity >= _workerPrice)
             Spawn();
         else if (quantity >= _basePrice && _flagTeked == true)
             Build();

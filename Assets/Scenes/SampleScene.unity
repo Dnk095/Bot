@@ -3719,7 +3719,7 @@ GameObject:
   - component: {fileID: 1591356924}
   - component: {fileID: 1591356923}
   - component: {fileID: 1591356922}
-  - component: {fileID: 1591356921}
+  - component: {fileID: 1591356925}
   m_Layer: 0
   m_Name: ScanButton
   m_TagString: Untagged
@@ -3748,18 +3748,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.099998474, y: 5}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1591356921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591356919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b96c5eacc442b4fba9c3e87a3c1ced, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1591356922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3842,6 +3830,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591356919}
   m_CullTransparentMesh: 1
+--- !u!114 &1591356925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591356919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b96c5eacc442b4fba9c3e87a3c1ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1618900292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3874,7 +3874,7 @@ MonoBehaviour:
   _radius: 20
   _scanTime: 1
   _golds: {fileID: 685583524}
-  _scanButton: {fileID: 1591356921}
+  _scanButton: {fileID: 1591356925}
 --- !u!4 &1618900294
 Transform:
   m_ObjectHideFlags: 0
