@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Flag : MonoBehaviour
 {
-   public void ChangeState()
+   public void TurnOff()
     {
         gameObject.SetActive(false);
     }

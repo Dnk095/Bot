@@ -5,7 +5,7 @@ public class PickingObject : MonoBehaviour
 {
     private Rigidbody _rigidbody;
 
-    private void Awake()
+    protected void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }

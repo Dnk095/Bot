@@ -4,7 +4,6 @@
 internal class ObjectTransparency : MonoBehaviour
 {
     private Material _material;
-    private Material _currentMaterial;
 
     private void Awake()
     {
@@ -12,9 +11,11 @@ internal class ObjectTransparency : MonoBehaviour
         ChangeVisible(0);
     }
 
-    public void ChangeVisible()
+    public void MakeItVisible()
     {
-        ChangeVisible(1);
+        int visible = 1;
+
+        ChangeVisible(visible);
     }
 
     private void ChangeVisible(float colorA)

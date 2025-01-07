@@ -40,7 +40,7 @@ public class Worker : MonoBehaviour
             _mover.StopMove();
             Building?.Invoke(_flag.transform.position);
             _goBuild = false;
-            flag.ChangeState();
+            flag.TurnOff();
         }
     }
 
@@ -53,7 +53,7 @@ public class Worker : MonoBehaviour
             _mover.Move(transform.position);
             _gold.transform.SetParent(null);
             _haveGold = false;
-            Destroy(_gold.gameObject);
+            _gold.Destroy();
             _mover.StopMove();
         }
     }
@@ -63,7 +63,7 @@ public class Worker : MonoBehaviour
         _distributor = distributor;
     }
 
-    public void InitBuild(Flag flag)
+    public void StartBuild(Flag flag)
     {
         _flag = flag;
         _goBuild = true;

@@ -6,41 +6,32 @@ public class GoldList : MonoBehaviour
     [SerializeField] private List<Gold> _list;
 
     private Transform _conteiner;
-    private List<Gold> _golds;
+
+    public bool HaveResources => _list.Count > 0;
 
     private void Awake()
     {
         _conteiner = GetComponent<Transform>();
-        _golds = new List<Gold>();
-
-        foreach (Gold gold in _list)
-            AddGold(gold);
-
-        _list.Clear();
+        _list = new List<Gold>();
     }
 
     public void AddGold(Gold gold)
     {
-        _golds.Add(gold);
+        _list.Add(gold);
         gold.transform.parent = _conteiner;
     }
 
     public void RemoveGold(Gold gold)
     {
-        _golds.Remove(gold);
+        _list.Remove(gold);
         gold.transform.parent = null;
-    }
-
-    public bool HaveResorce()
-    {
-        return _golds.Count > 0;
     }
 
     public Gold GetGoldMinimumDistance(Vector3 position)
     {
-        Gold currentGold = _golds[0];
+        Gold currentGold = _list[0];
 
-        foreach (Gold gold2 in _golds)
+        foreach (Gold gold2 in _list)
             if (CalculateDistance(position, gold2.transform.position) < CalculateDistance(position, currentGold.transform.position))
                 currentGold = gold2;
 

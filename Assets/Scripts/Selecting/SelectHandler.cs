@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,9 +9,6 @@ public class SelectHandler : MonoBehaviour
 
     private Selectable _selectable;
     private bool _isScaning = false;
-
-    public event Action<SelectableInfo> Selecting;
-    public event Action DeSelecting;
 
     private void OnEnable()
     {
@@ -34,19 +30,18 @@ public class SelectHandler : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
-            if (hit.collider.TryGetComponent(out Selectable selectable) && _selectable != selectable)
-            {
-                _selectable = selectable;
-                Selecting?.Invoke(_selectable.GetSelctableInfo());
-            }
-            else if (_selectable != null && _selectable.gameObject.TryGetComponent(out MainBuild mainBuild) && !EventSystem.current.IsPointerOverGameObject() && _isScaning == false)
-            {
-                mainBuild.GetFlagPosition(hit.point);
-            }
-            else if (_isScaning == true)
+            if (_isScaning == true)
             {
                 _scaner.Scan(hit.point);
                 _isScaning = false;
+            }
+            else if (hit.collider.TryGetComponent(out Selectable selectable) && _selectable != selectable)
+            {
+                _selectable = selectable;
+            }
+            else if (_selectable != null && _selectable.gameObject.TryGetComponent(out MainBuild mainBuild) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                mainBuild.GetFlagPosition(hit.point);
             }
         }
     }
@@ -55,7 +50,6 @@ public class SelectHandler : MonoBehaviour
     {
         if (_selectable != null)
         {
-            DeSelecting?.Invoke();
             _selectable = null;
         }
     }

@@ -1,29 +1,29 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PickingObject))]
-public class Gold : MonoBehaviour
+[RequireComponent(typeof(ObjectTransparency))]
+public class Gold : PickingObject
 {
-    private PickingObject _pickingObject;
     private ObjectTransparency _view;
 
-    private bool _isFound = false;
+    public bool IsFound { get; private set; } = false;
 
-    public bool IsFound => _isFound;
+    public event Action<Gold> Destroing;
 
-    private void Awake()
+    private new void Awake()
     {
-        _pickingObject = GetComponent<PickingObject>();
+        base.Awake();
         _view = GetComponent<ObjectTransparency>();
     }
 
     public void ChangeState()
     {
-        _isFound = true;
-        _view.ChangeVisible();
+        IsFound = true;
+        _view.MakeItVisible();
     }
 
-    public void PickUp(Transform parent, float distance)
+    public void Destroy()
     {
-        _pickingObject.PickUp(parent, distance);
+        Destroing?.Invoke(this);
     }
 }

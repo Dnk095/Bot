@@ -55,7 +55,7 @@ public class Distributor : MonoBehaviour
         {
             if (_haveFlag == true && _workers.Count > 0)
                 WorkerGoBuild();
-            else if (_workers.Count > 0 && _golds.HaveResorce() && _haveFlag == false)
+            else if (_workers.Count > 0 && _golds.HaveResources && _haveFlag == false)
                 WorkerGoMaining();
 
             yield return null;
@@ -75,7 +75,7 @@ public class Distributor : MonoBehaviour
     {
         Worker worker = _workers[0];
         _workers.Remove(worker);
-        worker.InitBuild(_flag);
+        worker.StartBuild(_flag);
         _haveFlag = false;
         WorkerBuild?.Invoke(worker);
         worker.ReturnedToBase -= OnReturnedToBase;
